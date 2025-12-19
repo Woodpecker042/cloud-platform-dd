@@ -1,0 +1,8 @@
+google-cloud-sdk/*
+official
+tmp/*
+output
+SDK
+
+# Mac specific
+.DS_Store

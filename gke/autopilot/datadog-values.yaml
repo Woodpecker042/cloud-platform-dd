@@ -1,0 +1,51 @@
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: gke-autopilot-sandbox
+
+  # The site of the Datadog intake to send Agent data to (example: `us3.datadoghq.com`)
+  # Default value is `datadoghq.com' (the US1 site)
+  # Documentation: https://docs.datadoghq.com/getting_started/site/
+  #site: <DATADOG_SITE>
+
+  # This option uses the API server to retrieve the node-level pod list from the API server.
+  # This setting is necessary to migrate away from the deprecated read-only kubelet port.
+  # Requires Agent 7.65.0+ and Datadog Helm chart version 3.113.0+.
+  kubelet:
+    useApiServer: true
+
+agents:
+  containers:
+    agent:
+      # resources for the Agent container
+      resources:
+        requests:
+          cpu: 200m
+          memory: 256Mi
+
+    traceAgent:
+      # resources for the Trace Agent container
+      resources:
+        requests:
+          cpu: 100m
+          memory: 200Mi
+
+    processAgent:
+      # resources for the Process Agent container
+      resources:
+        requests:
+          cpu: 100m
+          memory: 200Mi
+
+    systemProbe:
+      # resources for the System Probe container
+      resources:
+        requests:
+          cpu: 100m
+          memory: 400Mi
+
+  priorityClassCreate: true
+
+providers:
+  gke:
+    autopilot: true
